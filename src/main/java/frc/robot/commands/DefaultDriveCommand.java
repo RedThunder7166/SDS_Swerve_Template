@@ -1,6 +1,9 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
@@ -12,6 +15,8 @@ public class DefaultDriveCommand extends CommandBase {
     private final DoubleSupplier m_translationXSupplier;
     private final DoubleSupplier m_translationYSupplier;
     private final DoubleSupplier m_rotationSupplier;
+    ShuffleboardTab tab = Shuffleboard.getTab("Drivetrain");
+
 
     public DefaultDriveCommand(DrivetrainSubsystem drivetrainSubsystem,
                                DoubleSupplier translationXSupplier,
@@ -36,6 +41,8 @@ public class DefaultDriveCommand extends CommandBase {
                         m_drivetrainSubsystem.getGyroscopeRotation()
                 )
         );
+        double gyroheading = m_drivetrainSubsystem.getGyroAngle();
+        SmartDashboard.putNumber("Gyro Heading", gyroheading);
     }
 
     @Override
